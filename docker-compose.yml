@@ -1,0 +1,16 @@
+services:
+  transport-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: transport-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:80"
+    networks:
+      - transport-net
+
+networks:
+  transport-net:
+    name: transport-net
+    external: true
