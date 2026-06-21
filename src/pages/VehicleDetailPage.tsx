@@ -71,6 +71,7 @@ export default function VehicleDetailPage() {
   const odoMut = useUpdateOdometer();
 
   const [showDelete, setShowDelete] = useState(false);
+  const [deleteRecordTarget, setDeleteRecordTarget] = useState<{ id: string; partName: string; date: string } | null>(null);
   const [showRecord, setShowRecord] = useState(false);
   const [presetPart, setPresetPart] = useState<string | undefined>();
   const [showOdo, setShowOdo] = useState(false);
@@ -95,6 +96,16 @@ export default function VehicleDetailPage() {
       onSuccess: () => {
         showToast("Kendaraan dihapus");
         navigate("/vehicles");
+      },
+    });
+  };
+
+  const handleDeleteRecord = () => {
+    if (!deleteRecordTarget) return;
+    deleteRecordMut.mutate(deleteRecordTarget.id, {
+      onSuccess: () => {
+        showToast("Servis dihapus");
+        setDeleteRecordTarget(null);
       },
     });
   };
@@ -299,7 +310,13 @@ export default function VehicleDetailPage() {
                             <IconButton
                               size="small"
                               color="error"
-                              onClick={() => deleteRecordMut.mutate(r.id)}
+                              onClick={() =>
+                                setDeleteRecordTarget({
+                                  id: r.id,
+                                  partName: parts?.find((p) => p.id === r.part_id)?.name ?? r.part_id.slice(0, 8),
+                                  date: formatDate(r.performed_at),
+                                })
+                              }
                             >
                               <DeleteIcon fontSize="small" />
                             </IconButton>
@@ -328,7 +345,13 @@ export default function VehicleDetailPage() {
                         <IconButton
                           size="small"
                           color="error"
-                          onClick={() => deleteRecordMut.mutate(r.id)}
+                          onClick={() =>
+                            setDeleteRecordTarget({
+                              id: r.id,
+                              partName: parts?.find((p) => p.id === r.part_id)?.name ?? r.part_id.slice(0, 8),
+                              date: formatDate(r.performed_at),
+                            })
+                          }
                         >
                           <DeleteIcon fontSize="small" />
                         </IconButton>
@@ -360,6 +383,15 @@ export default function VehicleDetailPage() {
         onConfirm={handleDelete}
         onClose={() => setShowDelete(false)}
         loading={deleteMut.isPending}
+      />
+
+      <ConfirmDialog
+        open={!!deleteRecordTarget}
+        title="Hapus Servis"
+        message={`Yakin ingin menghapus servis ${deleteRecordTarget?.partName ?? ""} pada ${deleteRecordTarget?.date ?? ""}?`}
+        onConfirm={handleDeleteRecord}
+        onClose={() => setDeleteRecordTarget(null)}
+        loading={deleteRecordMut.isPending}
       />
 
       <RecordFormDialog
