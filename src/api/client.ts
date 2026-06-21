@@ -1,7 +1,8 @@
 import { tokenStore } from "./tokens";
 import type { ApiResponse } from "@/types";
 
-const BASE = "/api/v1";
+const API_ORIGIN = import.meta.env.VITE_API_BASE_URL ?? "";
+const BASE = `${API_ORIGIN}/api/v1`;
 
 export class ApiError extends Error {
   status: number;
