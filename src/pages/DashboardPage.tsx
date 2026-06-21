@@ -12,7 +12,6 @@ import {
   Grid,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { useQuery } from "@tanstack/react-query";
@@ -72,7 +71,18 @@ export default function DashboardPage() {
       {!isLoading && vehicles?.length === 0 && (
         <Card>
           <CardContent sx={{ textAlign: "center", py: { xs: 5, sm: 8 } }}>
-            <DirectionsCarIcon sx={{ fontSize: 48, color: "text.disabled" }} />
+            <Box
+              component="img"
+              src="/logo-transport-crop.png"
+              alt="Transport Care"
+              sx={{
+                width: { xs: 56, sm: 72 },
+                height: { xs: 56, sm: 72 },
+                objectFit: "contain",
+                margin: "0 auto",
+                opacity: 0.7,
+              }}
+            />
             <Typography variant="h6" sx={{ mt: 2 }}>
               Belum ada kendaraan
             </Typography>
@@ -132,19 +142,19 @@ function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
         >
           <Box sx={{ display: "flex", gap: 2, alignItems: "center", minWidth: 0 }}>
             <Box
+              component="img"
+              src="/logo-transport-crop.png"
+              alt="Transport Care"
               sx={{
-                width: 52,
-                height: 52,
+                width: { xs: 44, sm: 52 },
+                height: { xs: 44, sm: 52 },
+                objectFit: "contain",
+                flexShrink: 0,
                 borderRadius: 3,
                 bgcolor: "primary.50",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexShrink: 0,
+                p: { xs: 0.5, sm: 1 },
               }}
-            >
-              <DirectionsCarIcon sx={{ color: "primary.main" }} />
-            </Box>
+            />
             <Box sx={{ minWidth: 0 }}>
               <Typography
                 variant="h6"

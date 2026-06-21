@@ -83,19 +83,21 @@ export default function AppLayout() {
       <Toolbar sx={{ px: collapsed ? 1.5 : 2.5, py: 2 }}>
         <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, width: "100%" }}>
           <Box
+            component="img"
+            src="/logo-transport-crop.png"
+            alt="Transport Care"
             sx={{
-              width: 36,
-              height: 36,
-              borderRadius: 2.5,
-              bgcolor: "primary.main",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              width: collapsed ? 32 : 36,
+              height: collapsed ? 32 : 36,
+              objectFit: "contain",
               flexShrink: 0,
+              transition: (theme) =>
+                theme.transitions.create(["width", "height"], {
+                  easing: theme.transitions.easing.sharp,
+                  duration: theme.transitions.duration.standard,
+                }),
             }}
-          >
-            <DirectionsCarIcon sx={{ color: "#fff", fontSize: 22 }} />
-          </Box>
+          />
           {!collapsed && (
             <Typography
               variant="h6"
@@ -195,18 +197,16 @@ export default function AppLayout() {
       <Toolbar sx={{ px: 2.5, py: 2 }}>
         <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
           <Box
+            component="img"
+            src="/logo-transport-crop.png"
+            alt="Transport Care"
             sx={{
               width: 36,
               height: 36,
-              borderRadius: 2.5,
-              bgcolor: "primary.main",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              objectFit: "contain",
+              flexShrink: 0,
             }}
-          >
-            <DirectionsCarIcon sx={{ color: "#fff", fontSize: 22 }} />
-          </Box>
+          />
           <Typography variant="h6" sx={{ fontWeight: 800, color: "primary.dark" }}>
             Transport Care
           </Typography>

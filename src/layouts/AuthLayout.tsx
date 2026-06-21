@@ -1,6 +1,5 @@
 import { Outlet, Navigate } from "react-router-dom";
 import { Box, Container, Paper, Typography } from "@mui/material";
-import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import { useAuthStore } from "@/store/authStore";
 
 export default function AuthLayout() {
@@ -20,21 +19,26 @@ export default function AuthLayout() {
     >
       <Container maxWidth="sm">
         <Box sx={{ display: "flex", flexDirection: "column", gap: 3, alignItems: "center" }}>
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: { xs: 1, sm: 1.5 } }}>
             <Box
+              component="img"
+              src="/logo-transport-crop.png"
+              alt="Transport Care"
               sx={{
-                width: 48,
-                height: 48,
-                borderRadius: 3,
-                bgcolor: "primary.main",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                width: { xs: 40, sm: 48 },
+                height: { xs: 40, sm: 48 },
+                objectFit: "contain",
+                flexShrink: 0,
+              }}
+            />
+            <Typography
+              variant="h4"
+              sx={{
+                fontWeight: 800,
+                color: "primary.dark",
+                fontSize: { xs: "1.5rem", sm: "2rem" },
               }}
             >
-              <DirectionsCarIcon sx={{ color: "#fff", fontSize: 28 }} />
-            </Box>
-            <Typography variant="h4" sx={{ fontWeight: 800, color: "primary.dark" }}>
               Transport Care
             </Typography>
           </Box>
